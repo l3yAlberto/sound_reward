@@ -12,8 +12,8 @@ if ("id" in parameters && "rewardId" in parameters && "sons" in parameters) {
 }
 
 function som(name) {
-    const link = decodeURIComponent(parameters.sons).replace(/\/$/, '');;
-    const audio = new Audio(`${link}/${name}.mp3`);
+    // const site = decodeURIComponent(parameters.sons).replace(/\/$/, '');
+    const audio = new Audio(`https://github.com/l3yAlbertoJr/sound/blob/master/${name}.mp3`);
     audio.play();
 }
 
