@@ -8,13 +8,12 @@ location.search.slice(1).split('&').forEach((value, number)=>{
     }
 });
 if ("id" in parameters && "rewardId" in parameters && "sons" in parameters) {
-    console.log(parameters);
     connect();
 }
 
 function som(name) {
-    // const site = decodeURIComponent(parameters.sons).replace(/\/$/, '');
-    const audio = new Audio(`https://github.com/l3yAlbertoJr/sound/blob/master/${name}.mp3`);
+    const site = decodeURIComponent(parameters.sons).replace(/\/$/, '');
+    const audio = new Audio(`${site}${name}.mp3`);
     audio.play();
 }
 
