@@ -8,6 +8,7 @@ location.search.slice(1).split('&').forEach((value, number)=>{
     }
 });
 if ("id" in parameters && "rewardId" in parameters && "sons" in parameters) {
+    console.log(parameters);
     connect();
 }
 
