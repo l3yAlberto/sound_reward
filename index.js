@@ -1,4 +1,3 @@
-// id=481058159&rewardId=6a641a9a-3772-4eff-a4ca-47c9db901217
 const parameters = {};
 let ws;
 
@@ -8,15 +7,13 @@ location.search.slice(1).split('&').forEach((value, number)=>{
         parameters[data[0]] = data[1];
     }
 });
-console.log(parameters);
-if (parameters.id && parameters.rewardId) {
-    console.log(parameters);
+if ("id" in parameters && "rewardId" in parameters && "sons" in parameters) {
     connect();
 }
 
 function som(name) {
-    console.log(name);
-    let audio = new Audio(`https://github.com/l3yAlbertoJr/sound/raw/master/${name}.mp3`);
+    const link = decodeURIComponent(parameters.sons).replace(/\/$/, '');;
+    const audio = new Audio(`${link}/${name}.mp3`);
     audio.play();
 }
 
@@ -47,7 +44,6 @@ function heartbeat() {
 }
 
 function connect() {
-    console.log('opa');
     const heartbeatInterval = 1000 * 120; 
     const reconnectInterval = 1000 * 3;
     let heartbeatHandle;
