@@ -14,7 +14,8 @@ if ("id" in parameters && "rewardId" in parameters && "sons" in parameters) {
 function som(name) {
     const site = decodeURIComponent(parameters.sons).replace(/\/$/, '');
     const audio = new Audio(`${site}/${name}.mp3`);
-    if ("volume" in parameters) audio.volume = parameters.volume / 100;
+    const volume = Number (parameters.volume);
+    if ("volume" in parameters && !isNaN(volume) && volume <= 100 && volume > 0) audio.volume = parameters.volume / 100;
     audio.play();
 }
 
