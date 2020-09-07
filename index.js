@@ -15,7 +15,7 @@ function som(name) {
     const site = decodeURIComponent(parameters.sons).replace(/\/$/, '');
     const audio = new Audio(`${site}/${encodeURIComponent(name.toLowerCase())}.mp3`);
     const volume = Number (parameters.volume);
-    if ("volume" in parameters && volume <= 100 && volume > 0) audio.volume = parameters.volume / 100;
+    if (volume <= 100 && volume > 0) audio.volume = parameters.volume / 100;
     audio.play();
 }
 
