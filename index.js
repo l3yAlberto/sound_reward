@@ -13,7 +13,7 @@ if ("id" in parameters && "rewardId" in parameters && "sons" in parameters) {
 
 function som(name) {
     const site = decodeURIComponent(parameters.sons).replace(/\/$/, '');
-    const audio = new Audio(`${site}${name}.mp3`);
+    const audio = new Audio(`${site}/${name}.mp3`);
     audio.play();
 }
 
