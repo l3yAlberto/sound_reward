@@ -7,14 +7,14 @@ location.search.slice(1).split('&').forEach((value, number)=>{
         parameters[data[0]] = data[1];
     }
 });
-if ("id" in parameters && "rewardId" in parameters && "sons" in parameters && "volume" in parameters) {
+if ("id" in parameters && "rewardId" in parameters && "sons" in parameters) {
     connect();
 }
 
 function som(name) {
     const site = decodeURIComponent(parameters.sons).replace(/\/$/, '');
     const audio = new Audio(`${site}/${name}.mp3`);
-    audio.volume = parameters.volume;
+    if ("volume" in parameters) audio.volume = parameters.volume / 100;
     audio.play();
 }
 
