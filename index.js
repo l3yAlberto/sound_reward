@@ -1,5 +1,7 @@
 const parameters = {};
-let ws;
+let sons = [];
+let ws, audio, 
+play = true;
 
 location.search.slice(1).split('&').forEach((value, number)=>{
     const data = value.split('=');
@@ -9,11 +11,32 @@ location.search.slice(1).split('&').forEach((value, number)=>{
 });
 if ("id" in parameters && "rewardId" in parameters && "sons" in parameters) {
     connect();
+    loop();
+}
+
+async function loop() {
+    try {
+        if (play) {
+            if (sons.length > 0) {
+                play = false;
+                som(sons[0]);
+                sons.shift();
+            }
+        } else if (audio && audio.ended) {
+            play = true;
+        }
+    } catch (error) {
+        play = true;
+    }
+
+    setTimeout(() => {
+        loop();
+    }, 500);
 }
 
 function som(name) {
     const site = decodeURIComponent(parameters.sons).replace(/\/$/, '');
-    const audio = new Audio(`${site}/${encodeURIComponent(name.toLowerCase())}.mp3`);
+    audio = new Audio(`${site}/${encodeURIComponent(name.toLowerCase())}.mp3`);
     const volume = Number (parameters.volume);
     if (volume <= 100 && volume > 0) audio.volume = parameters.volume / 100;
     audio.play();
@@ -74,7 +97,7 @@ function connect() {
             if(message.type == "reward-redeemed" && message.data.redemption.reward.is_user_input_required){
                 if (message.data.redemption.reward.id == parameters.rewardId) {
                     try {
-                        som(message.data.redemption.user_input);
+                        sons.push(message.data.redemption.user_input);
                     } catch (error) {}
                 }
             }
